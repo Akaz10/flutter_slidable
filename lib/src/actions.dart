@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'slidable.dart';
 
@@ -18,7 +19,7 @@ class CustomSlidableAction extends StatelessWidget {
   ///
   /// The [flex] argument must also be greater than 0.
   const CustomSlidableAction({
-    super.key,
+    Key? key,
     this.flex = _kFlex,
     this.backgroundColor = _kBackgroundColor,
     this.foregroundColor,
@@ -27,7 +28,8 @@ class CustomSlidableAction extends StatelessWidget {
     this.padding,
     required this.onPressed,
     required this.child,
-  }) : assert(flex > 0);
+  })  : assert(flex > 0),
+        super(key: key);
 
   /// {@template slidable.actions.flex}
   /// The flex factor to use for this child.
@@ -130,19 +132,20 @@ class SlidableAction extends StatelessWidget {
   ///
   /// The [flex] argument must also be greater than 0.
   const SlidableAction({
-    super.key,
+    Key? key,
     this.flex = _kFlex,
     this.backgroundColor = _kBackgroundColor,
     this.foregroundColor,
     this.autoClose = _kAutoClose,
     required this.onPressed,
-    this.icon,
+    required this.icon,
     this.spacing = 4,
     this.label,
     this.borderRadius = BorderRadius.zero,
     this.padding,
   })  : assert(flex > 0),
-        assert(icon != null || label != null);
+        assert(icon != null || label != null),
+        super(key: key);
 
   /// {@macro slidable.actions.flex}
   final int flex;
@@ -160,7 +163,7 @@ class SlidableAction extends StatelessWidget {
   final SlidableActionCallback? onPressed;
 
   /// An icon to display above the [label].
-  final IconData? icon;
+  final Widget icon;
 
   /// The space between [icon] and [label] if both set.
   ///
@@ -182,7 +185,7 @@ class SlidableAction extends StatelessWidget {
 
     if (icon != null) {
       children.add(
-        Icon(icon),
+        icon,
       );
     }
 
